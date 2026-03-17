@@ -1,4 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
+import { POKEMON_LIST } from './pokemon-list.fake';
+import { Pokemon } from './Pokemon.model';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +9,20 @@ import { Component, signal } from '@angular/core';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('angular-pokedex-app');
+  pokemonList = signal(POKEMON_LIST)
+  Size(pokemon: Pokemon){
+    if(pokemon.life < 15){
+      return 'Petit';
+    }else if(pokemon.life < 25){
+      return 'Moyen';
+    }else{
+      return 'Grand';
+    }
+  };
+  incrementlife(pokemon : Pokemon){
+    pokemon.life = pokemon.life + 1
+  }
+  decrementlife(pokemon : Pokemon){
+      pokemon.life = pokemon.life - 1
+  }
 }
